@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title> {% block titulo %} {% endblock %} </title>
+	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.css" />
+	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.icons.css" />
+	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.theme.css" />
+</head>
+<body>
+	<header class="bck theme">
+		<div class="row">
+			<div class="column_4 text left">
+				{% block cabecera%} {% endblock%}
+			</div>
+			<nav class="column_8 padding text right bold" data-tuktuk="menu">
+				{% block menu%} {% endblock%}
+			</nav>
+		</div>
+	</header>
+	<section>
+		<div class="row">
+			{% block contenido %} {% endblock%}
+		</div>
+	</section>
+	<footer class="bck dark">
+		<div class="row text center padding">
+			Contables 2013
+		</div>
+	</footer>
+</body>
+</html>

@@ -1,39 +1,23 @@
-<!doctype html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<title>Login</title>
-	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.css" />
-	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.icons.css" />
-	<link rel="stylesheet" href="{{STATIC_URL}}components/Tuktuk/tuktuk.theme.css" />
-</head>
-<body>
-	<header class="bck theme">
-		<div class="row">
-			<div class="column_12 text center">
-				<h1>Login</h1>
-			</div>
-		</div>
-	</header>
-	<section>
-		<div class="row margin-top margin-bottom">
+{% extends 'base.html' %}
+{% block titulo %} Login {% endblock %}
+{% block cabecera %} <h1> Login </h1> {% endblock %}
+{% block contenido %} 
+			{% if formulario.errors %}
+				<p>Your username and password didn't match. Please try again.</p>
+			{% endif %}
+
 			<div class="column_4 offset_4 radius bck color text center padding-right padding-top padding-bottom">
-				<form action="#">
+				<form action="" method='post' >
+					{% csrf_token %}
 					<fieldset>
-						<label for="user">Usuario: </label>
-						<input type="text" id="user"/>
+						{{ formulario.username.label_tag }}
+						{{ formulario.username }}
 					</fieldset>
 					<fieldset>
-						<label for="password">Contraseña: </label>
-						<input type="password"  id="password"/>
+						{{ formulario.password.label_tag }}
+						{{ formulario.password }}
 					</fieldset>
 					<button class="button"> Login </button>
 				</form>
 			</div>
-		</div>
-	</section>
-	<footer class="bck dark text center">
-		2013 Contables
-	</footer>
-</body>
-</html>
+{% endblock %}

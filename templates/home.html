@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block titulo %} Home {% endblock %}
+{% block cabecera %} <h1>Home</h1><span>Bienvenido</span> <strong> {{usuario.username}}</strong> {% endblock %}
+{% block menu %} 
+
+  <a href="/logout/"><span class="icon user"></span>Cerrar Sesión</a>
+    
+
+{% endblock %}
+{% block contenido %} 
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<a href=""><span class="icon group icon-4x"></span></a>
+		<h2>Usuarios</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Plan Contable</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Periodo</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Transacción</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Libro Diario</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Libro Mayor</h2>
+	</div>
+	<div class="column_4 text center bck color radius padding margin-top margin-bottom">
+		<span class="icon book icon-4x"></span>
+		<h2>Cierre y Aperura de cuentas</h2>
+	</div>
+	
+	
+{% endblock %}
