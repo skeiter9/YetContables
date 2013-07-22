@@ -1,1 +1,1 @@
-web: gunicorn YetContables.wsgi
+web: gunicorn Yetcontables.wsgi
