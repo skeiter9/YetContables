@@ -37,11 +37,41 @@ def home(request) :
 #Usuarios
 @login_required(login_url="/")
 def usuarios (request) :
+	usuario=request.user
 	usuarios=User.objects.all()
-	return render_to_response('usuarios.html',{'usuarios':usuarios} , context_instance=RequestContext(request))
+	return render_to_response('usuarios.html',{'usuario':usuario,'usuarios':usuarios} , context_instance=RequestContext(request))
 
 @login_required(login_url="/")
 def cerrar(request) :
 	logout(request)
 	return HttpResponseRedirect('/')
+
+@login_required(login_url="/")
+def plan(request) :
+	usuario=request.user
+	return render_to_response('plan-contable.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+#periodo
+@login_required(login_url="/")
+def periodo(request) :
+	usuario=request.user
+	return render_to_response('periodo.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+@login_required(login_url="/")
+def transacciones(request) :
+	usuario=request.user
+	return render_to_response('transacciones.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+@login_required(login_url="/")
+def libroDiario(request) :
+	usuario=request.user
+	return render_to_response('libro-diario.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+@login_required(login_url="/")
+def libroMayor(request) :
+	usuario=request.user
+	return render_to_response('libro-mayor.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+
+#Cierre y apertura de cuentas 
+@login_required(login_url="/")
+def cierreYApertura(request) :
+	usuario=request.user
+	return render_to_response('cierre-y-apertura-de-cuentas.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+
 

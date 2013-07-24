@@ -2,10 +2,13 @@
 {% block titulo %} 
 Listado de usuarios
 {% endblock %}
+{% block cabecera %} 
+	<h1>Home</h1>
+	<span>Bienvenido</span> 
+	<strong> {{usuario.username}}</strong> 
+{% endblock %}
 {% block contenido %} 
 <div class="column_8">
-
-	
 	<table>
 		<tr>
 			<th>Número</th>

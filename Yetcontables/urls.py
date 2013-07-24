@@ -10,6 +10,12 @@ urlpatterns = patterns('',
     url(r'^home/', 'principal.views.home'),
     url(r'^logout/', 'principal.views.cerrar'),
     url(r'^usuarios/', 'principal.views.usuarios'),
+    url(r'^plan-contable/', 'principal.views.plan'),
+    url(r'^periodos/', 'principal.views.periodo'),
+    url(r'^transacciones/', 'principal.views.transacciones'),
+    url(r'^libro-diario/', 'principal.views.libroDiario'),
+    url(r'^libro-mayor/', 'principal.views.libroMayor'),
+    url(r'^cierre-y-apertura/', 'principal.views.cierreYApertura'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

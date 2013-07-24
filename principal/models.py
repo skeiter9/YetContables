@@ -55,6 +55,7 @@ class Movimiento(models.Model):
 #Cuentas
 class Cuenta(models.Model):
 	nombre=models.CharField(max_length=100)
+	numCuenta=models.CharField(max_length=100)
 	cuentaOrigin=models.CharField(max_length=20)
 	tipo=models.CharField(max_length=50)
 	estado=models.CharField(max_length=2)
