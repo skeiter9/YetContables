@@ -1,10 +1,12 @@
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from principal.forms import CuentaForm,TransaccionForm,MovimientoForm,CuentaForm,CierreApertura,PeriodoForm,UserForm
+from principal.models import Cuenta,Periodo,Transaccion,Movimiento,CierreApertura
 
 def inicio(request):
 	if not request.user.is_anonymous():
@@ -37,9 +39,24 @@ def home(request) :
 #Usuarios
 @login_required(login_url="/")
 def usuarios (request) :
-	usuario=request.user
-	usuarios=User.objects.all()
-	return render_to_response('usuarios.html',{'usuario':usuario,'usuarios':usuarios} , context_instance=RequestContext(request))
+	if request.method=='POST' :
+		userForm=UserCreationForm(request.POST)
+		if userForm.is_valid() :
+			userForm.save()
+			return HttpResponseRedirect('/usuarios')
+	elif request.method=='GET':
+		userId=request.GET['userSelect']
+		userSelected=User.objects.get(pk=userId)
+		usuario=request.user
+		usuarios=User.objects.all()
+		userForm=UserCreationForm()
+		return render_to_response('usuarios.html',{'userSelected':userSelected,'usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
+
+	else :
+		usuario=request.user
+		usuarios=User.objects.all()
+		userForm=UserCreationForm()
+		return render_to_response('usuarios.html',{'userSelected':'',usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
 
 @login_required(login_url="/")
 def cerrar(request) :
@@ -48,13 +65,22 @@ def cerrar(request) :
 
 @login_required(login_url="/")
 def plan(request) :
-	usuario=request.user
-	return render_to_response('plan-contable.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+	if request.method=='POST':
+		cuentaForm=CuentaForm(request.POST)
+		if cuentaForm.is_valid():
+			cuentaForm.save()
+			return HttpResponseRedirect('/home')
+	else :
+		usuario=request.user
+		cuentaForm=CuentaForm()
+		cuentas=Cuenta.objects.all
+		return render_to_response('plan-contable.html',{'usuario':usuario,'cuentaForm':cuentaForm,'cuentas':cuentas}, context_instance=RequestContext(request) )
 #periodo
 @login_required(login_url="/")
 def periodo(request) :
 	usuario=request.user
-	return render_to_response('periodo.html',{'usuario':usuario}, context_instance=RequestContext(request) )
+	periodoForm=PeriodoForm()
+	return render_to_response('periodo.html',{'usuario':usuario,'periodoForm':periodoForm}, context_instance=RequestContext(request) )
 @login_required(login_url="/")
 def transacciones(request) :
 	usuario=request.user

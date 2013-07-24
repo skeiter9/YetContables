@@ -20,18 +20,37 @@ Listado de usuarios
 		</tr>
 		{% for user in usuarios %}
 			<tr>
-				<td></td>
+				<td>{{ forloop.counter}} </td>
 				<td>{{ user.username }}</td>
 				<td>{{ user.first_name }} {{ user.last_name }} </td>
 				<td>{{ user.email }}</td>
 				<td>{{user.date_joined}}</td>
 				<td>
-					<a href="#"><span class="icon pencil"></span> </a>
-					<a href="#"><span class="icon remove-sign"></span> </a>
+					<a href="?userSelect={{ user.id }}"><span class="icon pencil"></span> </a>
+					<a href="?userSelect={{ user.id }}"><span class="icon remove-sign"></span> </a>
 				</td>
 			</tr>
 		{% endfor %}
 		
 	</table>
 </div>
+<div class="column_4">
+	<h2>Crear Usuario</h2>
+	<form action="" method="post">
+		{% csrf_token %}
+		{{ userForm }}
+		<button class="button">Registrar Usuario</button>
+	</form>
+</div>
+<div class="column_4">
+	<h2>Editar usuario 
+		{{ userSelected|default_if_none:"nothing" }}
+	</h2>
+	<form action="" method="post">
+		{% csrf_token %}
+		{{ userForm }}
+		<button class="button">Registrar Usuario</button>
+	</form>
+</div>
+
 {% endblock %}

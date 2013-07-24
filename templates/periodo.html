@@ -9,6 +9,11 @@ Listado de usuarios
 {% endblock %}
 {% block contenido %} 
 <div class="column_8">
-	Periodo
+	<h2>Crear Periodo</h2>
+	<form action="" method="post" id="periodoFormulario">
+		{% csrf_token %}
+		{{ periodoForm.as_p }}
+		<button class="button"> Registrar Cuenta </button>
+	</form>
 </div>
 {% endblock %}

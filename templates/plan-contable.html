@@ -1,14 +1,45 @@
 {% extends 'base.html' %}
 {% block titulo %} 
-Listado de usuarios
+Listado de Cuentas
 {% endblock %}
 {% block cabecera %} 
 	<h1>Home</h1>
 	<span>Bienvenido</span> 
 	<strong> {{usuario.username}}</strong> 
 {% endblock %}
-{% block contenido %} 
-<div class="column_8">
-	Plan contable
-</div>
+{% block contenidoCuentas %} 
+<section>
+	<div class="row">
+		<div class="column_4">
+			<h2>Crear Cuenta</h2>
+			<form action="" method="post" id="planFormulario">
+				{% csrf_token %}
+				{{ cuentaForm.as_p }}
+				<button class="button"> Registrar Cuenta </button>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="column_4">
+			<h2>Cuentas :</h2>
+			<table>
+				<tr>
+					<th>numCuenta</th>
+					<th>Nombre</th>
+					<th>tipo</th>
+					<th>estado</th>
+				</tr>
+				{% for cuenta in cuentas %}
+					<tr>
+						<td>{{ cuenta.numCuenta }}</td>
+						<td>{{ cuenta.nombre }} </td>
+						<td>{{ cuenta.tipo }}</td>
+						<td>{{ cuenta.estado }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</section>
+
 {% endblock %}
