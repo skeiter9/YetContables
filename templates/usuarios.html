@@ -43,14 +43,48 @@ Listado de usuarios
 	</form>
 </div>
 <div class="column_4">
-	<h2>Editar usuario 
-		{{ userSelected|default_if_none:"nothing" }}
+	<h2>
+		
 	</h2>
 	<form action="" method="post">
 		{% csrf_token %}
-		{{ userForm }}
+		{%for field in editUserForm %}
+			{% if field.html_name == 'username' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.username}} " />
+			{% elif field.html_name == 'email' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.email}} " />
+			{% elif field.html_name == 'first_name' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.first_name}} " />
+			{% elif field.html_name == 'last_name' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.last_name}} " />
+			{% elif field.html_name == 'date_joined' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.date_joined}} " />
+			{% elif field.html_name == 'last_login' %}
+				{{ field.label_tag }}
+					<input type="text" name="{{ field.html_name }}" value="{{userSelected.last_login}} " />
+			
+			{% elif field.html_name == 'is_superuser' %}
+				{{ field.label_tag }}
+					<input type="checkbox" name="{{ field.html_name }}" {% if userSelected.is_superuser%} checked {% endif%} /><br/>
+			{% elif field.html_name == 'is_staff' %}
+				{{ field.label_tag }}
+					<input type="checkbox" name="{{ field.html_name }}" {% if userSelected.is_staff%} checked {% endif%}  /><br/>
+			{% elif field.html_name == 'is_active' %}
+				{{ field.label_tag }}
+					<input type="checkbox" name="{{ field.html_name }}" {% if userSelected.is_active%} checked {% endif%} /><br/>
+
+			{%endif%}
+			
+
+		{%endfor%}
 		<button class="button">Registrar Usuario</button>
 	</form>
 </div>
 
 {% endblock %}
+     

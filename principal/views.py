@@ -44,19 +44,37 @@ def usuarios (request) :
 		if userForm.is_valid() :
 			userForm.save()
 			return HttpResponseRedirect('/usuarios')
-	elif request.method=='GET':
-		userId=request.GET['userSelect']
-		userSelected=User.objects.get(pk=userId)
+	elif 'userSelect' in request.GET :
 		usuario=request.user
 		usuarios=User.objects.all()
 		userForm=UserCreationForm()
-		return render_to_response('usuarios.html',{'userSelected':userSelected,'usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
-
+		editUserForm=UserForm()
+		userSelected=User.objects.get(pk=request.GET['userSelect'])
+		return render_to_response('usuarios.html',{'editUserForm':editUserForm,'userSelected':userSelected,'usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
+	
 	else :
 		usuario=request.user
 		usuarios=User.objects.all()
 		userForm=UserCreationForm()
-		return render_to_response('usuarios.html',{'userSelected':'',usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
+		userSelected=""
+		return render_to_response('usuarios.html',{'userSelected':userSelected,'usuario':usuario,'userForm':userForm,'usuarios':usuarios} , context_instance=RequestContext(request))
+
+@login_required
+def user_profile(request):
+    success = False
+    user = User.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        upform = UserProfileForm(request.POST, instance=user.get_profile())
+        if upform.is_valid():
+            up = upform.save(commit=False)
+            up.user = request.user
+            up.save()
+            success = True
+    else:
+        upform = UserProfileForm(instance=user.get_profile())       
+
+    return render_to_response('upload-user.html',
+        locals(), context_instance=RequestContext(request))
 
 @login_required(login_url="/")
 def cerrar(request) :
